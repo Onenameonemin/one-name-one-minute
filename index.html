@@ -1,0 +1,6 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>One Name One Minute</title></head>
+<body style="background:#101d30;color:white;text-align:center;font-family:Arial;padding:40px 16px">
+<h1>ONE NAME. ONE MINUTE.</h1><h2>Never Forgotten.</h2><p>Honoring America's fallen service members, one name and one minute at a time.</p><p>Pick one. Say their name. Remember their sacrifice.</p><h2 id="timer">60</h2><button onclick="let n=60;document.getElementById('timer').textContent=n;let t=setInterval(()=>{n--;document.getElementById('timer').textContent=n;if(n<=0)clearInterval(t)},1000)">Begin One Minute of Silence</button><p>We will remember them.</p>
+</body></html>
