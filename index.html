@@ -77,9 +77,11 @@ footer{padding:30px;color:#aebccc;font-size:13px}
 </footer>
 <script>
 let interval=null;
+const taps = new Audio('Taps_on_bugle.ogg.ogx');
 function startTimer(){
 if(interval)return;
 let remaining=60;
+taps.currentTime = 0; taps.play().catch(() => {}); 
 const display=document.getElementById('timer');
 const button=document.getElementById('start');
 const message=document.getElementById('message');
@@ -93,7 +95,7 @@ if(remaining<=0){
 clearInterval(interval);interval=null;
 button.disabled=false;
 button.textContent='Remember Again';
-message.textContent='Their name will not be forgotten.';
+message.textContent='Thank You for Remembering. Your 60 seconds of remembrance are complete. Their sacrifice will never be forgotten.';
 }
 },1000);
 }
