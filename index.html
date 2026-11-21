@@ -1,6 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>One Name One Minute</title></head>
-<body style="background:#101d30;color:white;text-align:center;font-family:Arial;padding:40px 16px">
-<h1>ONE NAME. ONE MINUTE.</h1><h2>Never Forgotten.</h2><p>Honoring America's fallen service members, one name and one minute at a time.</p><p>Pick one. Say their name. Remember their sacrifice.</p><h2 id="timer">60</h2><button onclick="let n=60;document.getElementById('timer').textContent=n;let t=setInterval(()=>{n--;document.getElementById('timer').textContent=n;if(n<=0)clearInterval(t)},1000)">Begin One Minute of Silence</button><p>We will remember them.</p>
-</body></html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>One Name One Minute | Never Forgotten</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0c192d;color:#fff;font-family:Arial,sans-serif;text-align:center;line-height:1.6}
+header{padding:55px 20px 35px;background:linear-gradient(#182e4c,#0c192d)}
+.flag{font-size:42px}
+h1{font-size:36px;letter-spacing:2px;line-height:1.2}
+h2{color:#f1d6a3}
+.subtitle{color:#d6dce7;font-size:18px}
+section{padding:30px 22px;max-width:650px;margin:auto}
+.card{background:#182b45;border:1px solid #344864;border-radius:15px;padding:24px;margin:18px auto}
+button,.action{display:inline-block;background:#b83d42;color:white;border:0;border-radius:9px;padding:15px 22px;font-size:17px;font-weight:bold;cursor:pointer;text-decoration:none}
+button:disabled{opacity:.6}
+#timer{font-size:72px;font-weight:bold;margin:12px}
+a{color:#b9d9ff}
+.sources a{display:block;margin:12px 0}
+footer{padding:30px;color:#aebccc;font-size:13px}
+</style>
+</head>
+<body>
+<header>
+<div class="flag">🇺🇸</div>
+<h1>ONE NAME.<br>ONE MINUTE.</h1>
+<p class="subtitle">Never Forgotten.</p>
+<p>Honoring America's fallen service members, one name and one minute at a time.</p>
+</header>
+<section>
+<h2>Freedom Has a Name.</h2>
+<p>Behind every name is a life, a family, and a sacrifice.</p>
+<p>This is a simple invitation to remember one American who died in military service.</p>
+<div class="card">
+<h2>Honor Someone Today</h2>
+<p>Choose a fallen service member from the historical records below. Learn their name. Speak it aloud. Then give one minute of silence in their memory.</p>
+<p><strong>Pick one. Say their name. Remember their sacrifice.</strong></p>
+</div>
+<div class="card">
+<h2>Your Moment of Silence</h2>
+<p>Speak their name before beginning.</p>
+<div id="timer" aria-live="off">60</div>
+<button id="start" onclick="startTimer()">Begin One Minute</button>
+<p id="message">Take this minute to remember.</p>
+</div>
+</section>
+<section>
+<h2>Find a Name to Honor</h2>
+<p>Explore historical casualty and memorial records. Individual searchable memorial profiles are coming in a future update.</p>
+<div class="card sources">
+<a href="https://www.abmc.gov/database-search" target="_blank" rel="noopener">American Battle Monuments Commission</a>
+<a href="https://en.m.wikipedia.org/wiki/Category:American_military_personnel_killed_in_World_War_I" target="_blank" rel="noopener">World War I Records</a>
+<a href="https://www.archives.gov/research/military/ww2/navy-casualties" target="_blank" rel="noopener">World War II Navy Casualties</a>
+<a href="https://www.archives.gov/research/military/korean-war" target="_blank" rel="noopener">Korean War Records</a>
+<a href="https://www.archives.gov/research/military/vietnam-war" target="_blank" rel="noopener">Vietnam War Records</a>
+</div>
+</section>
+<section>
+<div class="card">
+<h2>One Nation. One Minute.</h2>
+<p>On Memorial Day, join the National Moment of Remembrance at <strong>3:00 p.m. local time</strong>.</p>
+<p>Remember one name. Together, we remember them all.</p>
+</div>
+<button onclick="shareSite()">Share This Mission</button>
+</section>
+<footer>
+<p>ONE NAME. ONE MINUTE. NEVER FORGOTTEN.</p>
+<p>A free remembrance initiative.</p>
+</footer>
+<script>
+let interval=null;
+function startTimer(){
+if(interval)return;
+let remaining=60;
+const display=document.getElementById('timer');
+const button=document.getElementById('start');
+const message=document.getElementById('message');
+button.disabled=true;
+message.textContent='We remember their sacrifice.';
+display.textContent=remaining;
+interval=setInterval(()=>{
+remaining--;
+display.textContent=remaining;
+if(remaining<=0){
+clearInterval(interval);interval=null;
+button.disabled=false;
+button.textContent='Remember Again';
+message.textContent='Their name will not be forgotten.';
+}
+},1000);
+}
+function shareSite(){
+const url=window.location.href;
+if(navigator.share){
+navigator.share({title:'One Name One Minute',text:'Pick one. Say their name. Remember their sacrifice.',url}).catch(()=>{});
+}else if(navigator.clipboard){
+navigator.clipboard.writeText(url).then(()=>alert('Website link copied.'));
+}else{prompt('Copy this website link:',url);}
+}
+</script>
+</body>
+</html>
